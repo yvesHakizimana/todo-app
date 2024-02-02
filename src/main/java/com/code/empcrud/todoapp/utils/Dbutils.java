@@ -1,8 +1,10 @@
 package com.code.empcrud.todoapp.utils;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class Dbutils {
 
@@ -10,7 +12,7 @@ public class Dbutils {
     private static String jdbcUsername = "postgres";
     private static String jdbcPassword = "P0S1tiv@!";
 
-    public Connection connectToDb(){
+    public Connection connectToDb() throws SQLException{
         Connection conn = null;
         try{
             Class.forName("org.postgresql.Driver");
@@ -26,6 +28,14 @@ public class Dbutils {
         }
 
         return conn;
+    }
+
+    public static Date getSQLDate(LocalDate date) {
+        return java.sql.Date.valueOf(date);
+    }
+
+    public static LocalDate getUtilDate(Date sqlDate) {
+        return sqlDate.toLocalDate();
     }
 
 }
