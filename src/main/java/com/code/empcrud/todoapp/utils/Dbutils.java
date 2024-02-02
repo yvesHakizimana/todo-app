@@ -28,9 +28,4 @@ public class Dbutils {
         return conn;
     }
 
-    public static void main(String[] args){
-        Dbutils dbutils =  new Dbutils();
-        dbutils.connectToDb();
-    }
-
 }
