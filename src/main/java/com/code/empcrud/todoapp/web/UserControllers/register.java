@@ -41,7 +41,7 @@ public class register extends HttpServlet {
         boolean result = userDao.insertUser(user, dbutils);
         if(result){
             request.setAttribute("NOTIFICATION", "User registered Successfully");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("register.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
             dispatcher.forward(request, response);
         }
         else{
