@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet( name = "Login-user", value = "/login-user")
 public class LoginUser extends HttpServlet {
@@ -31,13 +32,16 @@ public class LoginUser extends HttpServlet {
         boolean result = loginDao.validate(loginBean);
         if(result)
         {
-//            HttpSession session = request.getSession();
-//            session.setAttribute("username", username);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("todo-list.jsp");
-            dispatcher.forward(request, res);
+            HttpSession session = request.getSession();
+            session.setAttribute("username", username);
+            res.sendRedirect("fetch-todo");
         }
         else {
-            res.sendRedirect("login.jsp");
+            String message = "Username or password is invalid";
+            request.setAttribute("message", message);
+           RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+           dispatcher.forward(request, res);
+
         }
     }
 
